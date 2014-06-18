@@ -12,5 +12,5 @@ Apparently strips with LPD8803/LPD8809 chips may work too.
 5. Restart the IDE
 
 ## Example products
-* An LED strip using LDP8806 [Adafruit](http://www.adafruit.com/products/306)
-* A tiny non-SPI mico-controller [Trinket](http://www.adafruit.com/products/1501)
+* An LED strip using LDP8806 on [Adafruit](http://www.adafruit.com/products/306)
+* A tiny non-SPI mico-controller called [Trinket](http://www.adafruit.com/products/1501)
