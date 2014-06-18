@@ -1,5 +1,4 @@
-#include "LPD8806.h"
-#include "SPI.h"
+#include "Simple_LPD8806.h"
 
 // Example to control LPD8806-based RGB LED Modules in a strip
 
@@ -9,13 +8,13 @@
 int nLEDs = 32;
 
 // Chose 2 pins for output; can be any valid output pins:
-int dataPin  = 2;
-int clockPin = 3;
+int dataPin  = 0;
+int clockPin = 1;
 
 // First parameter is the number of LEDs in the strand.  The LED strips
 // are 32 LEDs per meter but you can extend or cut the strip.  Next two
 // parameters are SPI data and clock pins:
-LPD8806 strip = LPD8806(nLEDs, dataPin, clockPin);
+Simple_LPD8806 strip = Simple_LPD8806(nLEDs, dataPin, clockPin);
 
 // You can optionally use hardware SPI for faster writes, just leave out
 // the data and clock pin parameters.  But this does limit use to very
@@ -35,7 +34,6 @@ void setup() {
 
 
 void loop() {
-
   // Send a simple pixel chase in...
   colorChase(strip.Color(127, 127, 127), 50); // White
   colorChase(strip.Color(127,   0,   0), 50); // Red
@@ -66,21 +64,21 @@ void loop() {
 
 void rainbow(uint8_t wait) {
   int i, j;
-   
+
   for (j=0; j < 384; j++) {     // 3 cycles of all 384 colors in the wheel
     for (i=0; i < strip.numPixels(); i++) {
       strip.setPixelColor(i, Wheel( (i + j) % 384));
-    }  
+    }
     strip.show();   // write all the pixels out
     delay(wait);
   }
 }
 
-// Slightly different, this one makes the rainbow wheel equally distributed 
+// Slightly different, this one makes the rainbow wheel equally distributed
 // along the chain
 void rainbowCycle(uint8_t wait) {
   uint16_t i, j;
-  
+
   for (j=0; j < 384 * 5; j++) {     // 5 cycles of all 384 colors in the wheel
     for (i=0; i < strip.numPixels(); i++) {
       // tricky math! we use each pixel as a fraction of the full 384-color wheel
@@ -88,7 +86,7 @@ void rainbowCycle(uint8_t wait) {
       // Then add in j which makes the colors go around per pixel
       // the % 384 is to make the wheel cycle around
       strip.setPixelColor(i, Wheel( ((i * 384 / strip.numPixels()) + j) % 384) );
-    }  
+    }
     strip.show();   // write all the pixels out
     delay(wait);
   }
@@ -131,9 +129,9 @@ void theaterChase(uint32_t c, uint8_t wait) {
         strip.setPixelColor(i+q, c);    //turn every third pixel on
       }
       strip.show();
-     
+
       delay(wait);
-     
+
       for (int i=0; i < strip.numPixels(); i=i+3) {
         strip.setPixelColor(i+q, 0);        //turn every third pixel off
       }
@@ -149,9 +147,9 @@ void theaterChaseRainbow(uint8_t wait) {
           strip.setPixelColor(i+q, Wheel( (i+j) % 384));    //turn every third pixel on
         }
         strip.show();
-       
+
         delay(wait);
-       
+
         for (int i=0; i < strip.numPixels(); i=i+3) {
           strip.setPixelColor(i+q, 0);        //turn every third pixel off
         }
@@ -172,17 +170,17 @@ uint32_t Wheel(uint16_t WheelPos)
       r = 127 - WheelPos % 128;   //Red down
       g = WheelPos % 128;      // Green up
       b = 0;                  //blue off
-      break; 
+      break;
     case 1:
       g = 127 - WheelPos % 128;  //green down
       b = WheelPos % 128;      //blue up
       r = 0;                  //red off
-      break; 
+      break;
     case 2:
-      b = 127 - WheelPos % 128;  //blue down 
+      b = 127 - WheelPos % 128;  //blue down
       r = WheelPos % 128;      //red up
       g = 0;                  //green off
-      break; 
+      break;
   }
   return(strip.Color(r,g,b));
 }

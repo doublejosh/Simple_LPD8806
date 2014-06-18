@@ -5,20 +5,20 @@
  #include <pins_arduino.h>
 #endif
 
-class LPD8806 {
+class Simple_LPD8806 {
 
  public:
 
-  LPD8806(uint16_t n, uint8_t dpin, uint8_t cpin); // Configurable pins
-  LPD8806(uint16_t n); // Use SPI hardware; specific pins only
-  LPD8806(void); // Empty constructor; init pins & strip length later
+  Simple_LPD8806(uint16_t n, uint8_t dpin, uint8_t cpin); // Configurable pins
+  Simple_LPD8806(uint16_t n); // Use SPI hardware; specific pins only
+  //LPD8806(void); // Empty constructor; init pins & strip length later
   void
     begin(void),
     show(void),
     setPixelColor(uint16_t n, uint8_t r, uint8_t g, uint8_t b),
     setPixelColor(uint16_t n, uint32_t c),
     updatePins(uint8_t dpin, uint8_t cpin), // Change pins, configurable
-    updatePins(void),                       // Change pins, hardware SPI
+    //updatePins(void),                       // Change pins, hardware SPI
     updateLength(uint16_t n);               // Change strip length
   uint16_t
     numPixels(void);
@@ -38,9 +38,9 @@ class LPD8806 {
   volatile uint8_t
     *clkport  , *dataport;   // Clock & data PORT registers
   void
-    startBitbang(void),
-    startSPI(void);
+    startBitbang(void);
+    //startSPI(void);
   boolean
-    hardwareSPI, // If 'true', using hardware SPI
+    //hardwareSPI, // If 'true', using hardware SPI
     begun;       // If 'true', begin() method was previously invoked
 };
