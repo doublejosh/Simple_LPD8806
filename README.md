@@ -1,18 +1,17 @@
-# Arduino library for LPD8806 #
+# Arduino library for LPD8806
+### For tiny non-SPI micro-controllers.
 This Library was written for the LPD8806 PWM LED driver chips, strips and pixels.
-But the LPD8803/LPD8809 will probably work too.
-
-## Where to Buy? ##
-Pick some up at [Adafruit Industries](http://www.adafruit.com/products/306)
-
-## Download ##
-Click the Downloads Tab in the Tabbar above. 
-Or follow [this](https://github.com/adafruit/LPD8806/zipball/master) link
+It was adapted to work with with tiny non-SPI micro controllers.
+Apparently strips with LPD8803/LPD8809 chips may work too.
 
 ## Installation ##
 * Uncompress the Downloaded Library
-* Rename the uncompressed folder to LPD8806
-* Check that the LPD8806 folder contains LPD8806.cpp and LPD8806.h
-* Place the LPD8806 library folder your <arduinosketchfolder>/libraries/ folder, 
+* Rename the uncompressed folder to Simple_LPD8806
+* Check that the Simple_LPD8806 folder contains Simple_LPD8806.cpp and Simple_LPD8806.h
+* Place the Simple_LPD8806 library folder your <arduinosketchfolder>/libraries/ folder,
   if the libraries folder does not exist - create it first!
 * Restart the IDE
+
+## Example products
+An LED strip using LDP8806 [Adafruit](http://www.adafruit.com/products/306)
+A tiny non-SPI mico-controller [Trinket](http://www.adafruit.com/products/1501)
